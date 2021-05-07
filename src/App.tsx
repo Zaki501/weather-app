@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 //testing commits - origin === remote, branch === master
-//develop branch - first commit
+//master branch && develop branch merge
 
 function App() {
   return (
