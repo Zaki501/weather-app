@@ -10,7 +10,7 @@ import { blue } from '@material-ui/core/colors';
 const theme = createMuiTheme({
   palette: {
     primary: blue,
-    type: 'dark',
+   // type: 'dark',
   },
 })
 
@@ -21,10 +21,19 @@ function App() {
   const [Loading, setLoading] = useState(true);
   const [FocusCard, setFocusCard] = useState<any | null>(null);
 
-  function changeFocus(index : number) {
+  const changeFocus = (index: number, dt: any) => {
     setFocusCard(index);
     console.log("new index is:", index);
+    console.log(dt);
+    let k = document.getElementById(dt);
+    if (k != null) {
+      k.focus({
+          preventScroll: !0
+        });
+    }
+
   }
+  // accept 2nd arguemnt, id props.day
 
   //save data as state
   const fetchLocalData = () => {
@@ -63,13 +72,10 @@ function App() {
 
   return (
     
-
       <ThemeProvider theme={theme}>
         {Loading ? "Loading..." : <Content DailyData={DailyData} HourlyData={ThreeHourData} FocusCard={FocusCard} changeFocus={changeFocus}/>}
       </ThemeProvider>
 
-
-   
   );
 }
 

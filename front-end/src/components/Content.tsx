@@ -10,7 +10,7 @@ const Content = (props: { DailyData: any, HourlyData: any, FocusCard: number, ch
     const useStyles = makeStyles({
         table: {
             // https://codeburst.io/how-to-create-horizontal-scrolling-containers-d8069651e9c6
-            border: "1px solid red",
+          
             width: "600px",
             display: "block",
             overflowX: "scroll",
@@ -35,11 +35,11 @@ const Content = (props: { DailyData: any, HourlyData: any, FocusCard: number, ch
                         if (props.FocusCard === index) {
                             return (
                                 <Grid item>
-                                    {/* pass down index and the change state function */}
                                     <WeatherCard Day={day}/>
                                 </Grid>
                             )
-                        } else {
+                        } else 
+                        if (index < 6) {
                             return (
                                 <Grid item>
                                     {<WeatherThumbnail Day={day} Index={index} changeFocus={props.changeFocus}/>}
@@ -48,6 +48,7 @@ const Content = (props: { DailyData: any, HourlyData: any, FocusCard: number, ch
                         }
                     })}
                 </Grid>
+               
 
             </Box>
             

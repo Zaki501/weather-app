@@ -5,6 +5,11 @@ export default function FetchData(props: {Data: any}) {
     const {lat, lon, timezone, timezone_offset, current, minutely, hourly, daily} = props.Data;
     console.log(lat, lon);
 
+// 5 DAY / 3 HOUR FORECAST = https://api.openweathermap.org/data/2.5/forecast?lat=51&lon=0.1&appid=__&units=metric
+// ONE CALL API = https://api.openweathermap.org/data/2.5/onecall?lat=51&lon=0.1&exclude=minutely,hourly&appid=__&units=metric
+
+
+
    // useEffect(() => { fetchData(apiUrl) }, []);
 
     // const fetchData = async (url: string) => {

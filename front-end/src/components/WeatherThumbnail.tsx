@@ -34,8 +34,9 @@ const WeatherThumbnail = (props: { Day: any, Index: number, changeFocus: any }) 
 
 
   return (
-    <Card className={classes.root} variant="outlined">
-      <CardActionArea onClick={() => props.changeFocus(props.Index)}>
+    //
+    <Card className={classes.root} variant="outlined" >
+      <CardActionArea onClick={() => props.changeFocus(props.Index, props.Day.dt)} id={props.Day.dt}>
 
 
         <CardContent>
