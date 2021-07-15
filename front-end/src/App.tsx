@@ -10,7 +10,7 @@ import { blue } from '@material-ui/core/colors';
 const theme = createMuiTheme({
   palette: {
     primary: blue,
-   // type: 'dark',
+    // type: 'dark',
   },
 })
 
@@ -21,19 +21,27 @@ function App() {
   const [Loading, setLoading] = useState(true);
   const [FocusCard, setFocusCard] = useState<any | null>(null);
 
-  const changeFocus = (index: number, dt: any) => {
-    setFocusCard(index);
-    console.log("new index is:", index);
-    console.log(dt);
-    let k = document.getElementById(dt);
-    if (k != null) {
-      k.focus({
-          preventScroll: !0
-        });
+
+  const changeFocus = function (index: number, dt: any) {
+setFocusCard(index);
+    const scrollableDiv = document.getElementById('container');
+    const targetElement = document.getElementById(dt);
+
+    if (!targetElement && scrollableDiv != null) {
+      // move to 0, if theres no element found
+      scrollableDiv.scrollTo({ left: 0, behavior: 'smooth' });
     }
 
-  }
-  // accept 2nd arguemnt, id props.day
+    if (targetElement != null && scrollableDiv != null) {
+      // get the elements left position
+      let x = targetElement.offsetLeft;
+      scrollableDiv.scrollTo({ left: x - 300, behavior: 'smooth' });
+    }
+    
+
+  };
+
+
 
   //save data as state
   const fetchLocalData = () => {
@@ -68,13 +76,13 @@ function App() {
 
   // console.log(apiUrl)
 
-  
+
 
   return (
-    
-      <ThemeProvider theme={theme}>
-        {Loading ? "Loading..." : <Content DailyData={DailyData} HourlyData={ThreeHourData} FocusCard={FocusCard} changeFocus={changeFocus}/>}
-      </ThemeProvider>
+
+    <ThemeProvider theme={theme}>
+      {Loading ? "Loading..." : <Content DailyData={DailyData} HourlyData={ThreeHourData} FocusCard={FocusCard} changeFocus={changeFocus} />}
+    </ThemeProvider>
 
   );
 }

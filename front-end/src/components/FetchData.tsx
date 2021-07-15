@@ -34,11 +34,6 @@ export default function FetchData(props: {Data: any}) {
 
     // console.log(apiUrl)
 
-    // const apiUrl = "https://randomuser.me/api/";
-    // console.log(Data)
-    // console.log(apiUrl)
-    // const { title, first, last }: any = Data;
-
     return (
         <div>
             {/* <h1>  {Loading ? "Loading..." : [title, first, last]} </h1>  */}

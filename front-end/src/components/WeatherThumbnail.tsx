@@ -32,11 +32,12 @@ const WeatherThumbnail = (props: { Day: any, Index: number, changeFocus: any }) 
   const tempHigh = `${Math.round(props.Day.temp.max)}°c`;
   const tempLow = `${Math.round(props.Day.temp.min)}°c`;
 
+  
 
   return (
     //
-    <Card className={classes.root} variant="outlined" >
-      <CardActionArea onClick={() => props.changeFocus(props.Index, props.Day.dt)} id={props.Day.dt}>
+    <Card className={classes.root} variant="outlined">
+      <CardActionArea onClick={() => props.changeFocus(props.Index, props.Day.dt)}>
 
 
         <CardContent>
@@ -48,7 +49,7 @@ const WeatherThumbnail = (props: { Day: any, Index: number, changeFocus: any }) 
         <CardHeader
           className={classes.test}
           avatar={
-            <Avatar aria-label="recipe" src={iconUrl} />
+            <Avatar src={iconUrl} />
           }
           title={tempHigh}
           subheader={tempLow}
