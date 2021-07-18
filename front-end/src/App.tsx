@@ -19,11 +19,12 @@ function App() {
   const [DailyData, setDailyData] = useState<any | null>(null);
   const [ThreeHourData, setThreeHourData] = useState<any | null>(null);
   const [Loading, setLoading] = useState(true);
-  const [FocusCard, setFocusCard] = useState<any | null>(null);
+  const [FocusCard, setFocusCard] = useState(0);
 
 
   const changeFocus = function (index: number, dt: any) {
 setFocusCard(index);
+console.log(FocusCard)
     const scrollableDiv = document.getElementById('container');
     const targetElement = document.getElementById(dt);
 

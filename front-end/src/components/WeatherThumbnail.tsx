@@ -4,12 +4,17 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Avatar, CardActionArea, CardHeader, Grid } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   root: {
+    // border: "1px solid red",
     width: "100px",
     fontWeight: 1,
-    borderRadius: 0
+    borderRadius: 0,
+    psition: "relative",
+    // display: "inline-block",
+    alignSelf: "end"
 
   },
   title: {
@@ -54,22 +59,6 @@ const WeatherThumbnail = (props: { Day: any, Index: number, changeFocus: any }) 
           title={tempHigh}
           subheader={tempLow}
         />
-
-
-        {/* <Grid container className={classes.test}>
-            <Grid item className={classes.test}>
-              <img src={iconUrl} />
-
-            </Grid>
-            <Grid item className={classes.test}>
-              <Typography color="textSecondary">
-                {Math.round(props.Day.temp.max)}°C
-              <br />
-                {Math.round(props.Day.temp.min)}°C
-              </Typography>
-            </Grid>
-
-          </Grid> */}
 
       </CardActionArea>
     </Card>

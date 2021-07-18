@@ -11,12 +11,15 @@ const Content = (props: { DailyData: any, HourlyData: any, FocusCard: number, ch
         table: {
             // https://codeburst.io/how-to-create-horizontal-scrolling-containers-d8069651e9c6
           
-            width: "600px",
+            width: "787px",
             display: "block",
             overflowX: "scroll",
             overflowY: "hidden",
             whiteSpace: "nowrap",
             position: "relative"
+        },
+        item: {
+            alignSelf: "end"
         }
     });
 
@@ -35,14 +38,14 @@ const Content = (props: { DailyData: any, HourlyData: any, FocusCard: number, ch
 
                         if (props.FocusCard === index) {
                             return (
-                                <Grid item>
+                                <Grid>
                                     <WeatherCard Day={day}/>
                                 </Grid>
                             )
                         } else 
                         if (index < 6) {
                             return (
-                                <Grid item>
+                                <Grid item className={classes.item}>
                                     {<WeatherThumbnail Day={day} Index={index} changeFocus={props.changeFocus}/>}
                                 </Grid>
                             )
