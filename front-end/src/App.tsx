@@ -15,76 +15,65 @@ const theme = createMuiTheme({
 })
 
 function App() {
-
   const [DailyData, setDailyData] = useState<any | null>(null);
   const [ThreeHourData, setThreeHourData] = useState<any | null>(null);
+  const [CityAndCountry, setCityAndCountry] = useState<any | null>(null);
   const [Loading, setLoading] = useState(true);
   const [FocusCard, setFocusCard] = useState(0);
 
+  // length of bars - negative temps!
+  // color of bar - use d3, or conditional css (array of possible color values, )
 
   const changeFocus = function (index: number, dt: any) {
-setFocusCard(index);
-console.log(FocusCard)
-    const scrollableDiv = document.getElementById('container');
-    const targetElement = document.getElementById(dt);
+    setFocusCard(index);
 
-    if (!targetElement && scrollableDiv != null) {
-      // move to 0, if theres no element found
-      scrollableDiv.scrollTo({ left: 0, behavior: 'smooth' });
+    const scrollableDiv = document.getElementById('container');
+    const elements = document.getElementsByClassName("target");
+    let array = [];
+
+    for (let i = 0; i < elements.length; i++) {
+      array.push(elements[i].id)
     }
+    const closest = array.sort((a: any, b: any) => Math.abs(dt - a) - Math.abs(dt - b))[0]
+
+    const targetElement = document.getElementById(closest);
 
     if (targetElement != null && scrollableDiv != null) {
-      // get the elements left position
       let x = targetElement.offsetLeft;
       scrollableDiv.scrollTo({ left: x - 300, behavior: 'smooth' });
     }
-    
 
   };
 
-
-
-  //save data as state
-  const fetchLocalData = () => {
-    setDailyData(JSONdata);
-    setThreeHourData(JSONdata2);
+  const fetchBackendData = async () => {
+    const response = await fetch("/getUsersLocation");
+    const { dailyData, threeHourData, cityAndCountry } = await response.json()
+    setDailyData(dailyData);
+    setThreeHourData(threeHourData);
+    setCityAndCountry(cityAndCountry);
     setLoading(false);
   }
-  // fetch Local data, on first render
-  useEffect(() => fetchLocalData(), [])
 
-  // useEffect(() => { fetchData(apiUrl) }, []);
-
-  // const fetchData = async (url: string) => {
-  //   const response = await fetch(url);
-  //   const JSONdata = await response.json();
-  //   setData(JSONdata);
+  // function to save data as state
+  // const fetchLocalData = () => {
+  //   setDailyData(JSONdata);
+  //   setThreeHourData(JSONdata2);
   //   setLoading(false);
   // }
+  // fetch Local data, on first render
+  // useEffect(() => fetchLocalData(), [])
 
-  // //"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={API key}",
+  useEffect(() => {
+    fetchBackendData()
 
-  // const apiData = {
-  //   url: "https://api.openweathermap.org/data/2.5/onecall?",
-  //   lat: 51,
-  //   lon: 0.1,
-  //   exclude: "minutely,hourly",
-  //   key: "_",
-  //   units: "metric"
-  // }
-  // const { url, lat, lon, exclude, key ,units} = apiData;
-  // const apiUrl = `${url}lat=${lat}&lon=${lon}&exclude=${exclude}&appid=${key}&units=${units}`
+  }, [])
 
-  // console.log(apiUrl)
-
-
-
+  // <div>{CityAndCountry.city}, {CityAndCountry.country_name}</div>
   return (
-
     <ThemeProvider theme={theme}>
-      {Loading ? "Loading..." : <Content DailyData={DailyData} HourlyData={ThreeHourData} FocusCard={FocusCard} changeFocus={changeFocus} />}
-    </ThemeProvider>
 
+      {Loading ? "Loading..." : <Content DailyData={DailyData} HourlyData={ThreeHourData} CityAndCountry={CityAndCountry} FocusCard={FocusCard} changeFocus={changeFocus} />}
+    </ThemeProvider>
   );
 }
 

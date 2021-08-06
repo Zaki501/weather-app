@@ -39,13 +39,17 @@ app.get("/getUsersLocation", async function (req, res) {
 
   // const ipAddress = req.socket.remoteAddress;
   // random ip address -> https://www.ipvoid.com/random-ip/
-  const ipAddress = '142.235.32.178';
+  // const ipAddress = '31.48.173.70';
+  const ipAddress = '30.82.166.186';
 
   // const url = 'https://api.ipgeolocation.io/ipgeo?apiKey=IPKEY&ip=ipAddress';
   const geolocationUrl = `https://api.ipgeolocation.io/ipgeo?apiKey=${IP_KEY}&ip=${ipAddress}`
 
   const location = await fetchData(geolocationUrl);
-  const { latitude, longitude } = location;
+  const { city, country_name, latitude, longitude } = location;
+
+  // console.log(city, country_name, latitude, longitude)
+  const cityAndCountry = {"city": city, "country_name": country_name}
 
   const openWeatherApi = {
     dailyUrl: "https://api.openweathermap.org/data/2.5/onecall?",
@@ -65,7 +69,7 @@ app.get("/getUsersLocation", async function (req, res) {
   // 5 DAY / 3 HOUR FORECAST = https://api.openweathermap.org/data/2.5/forecast?lat=51&lon=0.1&appid=__&units=metric
   // ONE CALL API = https://api.openweathermap.org/data/2.5/onecall?lat=51&lon=0.1&exclude=minutely,hourly&appid=__&units=metric
 
-  res.json({ "daily_data": dailyData, "hourly_data": threeHourData });
+  res.json({ "dailyData": dailyData, "threeHourData": threeHourData, "cityAndCountry": cityAndCountry});
 })
 
 

@@ -5,7 +5,7 @@ import WeatherTable from "./WeatherTable";
 import WeatherThumbnail from "./WeatherThumbnail";
 
 
-const Content = (props: { DailyData: any, HourlyData: any, FocusCard: number, changeFocus: any }) => {
+const Content = (props: { DailyData: any, HourlyData: any, CityAndCountry: any, FocusCard: number, changeFocus: any }) => {
 
     const useStyles = makeStyles({
         table: {
@@ -29,6 +29,7 @@ const Content = (props: { DailyData: any, HourlyData: any, FocusCard: number, ch
 
         <Grid>
             <Box>
+                <h1>{props.CityAndCountry.city}, {props.CityAndCountry.country_name}</h1>
                 <Grid container>
 
                     {props.DailyData.daily.map((day: any, index: number) => {
