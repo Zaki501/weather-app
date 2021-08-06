@@ -1,26 +1,13 @@
 require('dotenv').config()
 const fetch = require('node-fetch');
 const express = require('express');
+const path = require('path');
 
 const app = express();
 
 const port = process.env.PORT;
 const IP_KEY = process.env.IP_KEY
 const WEATHER_KEY = process.env.WEATHER_KEY
-
-/*
-Example: https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-How to get lat and long:
-  user enters location OR get users position 
-
-*/
-
-// get ip address
-app.get("/", function (req, res) {
-  res.send('your IP is: ' + req.socket.remoteAddress);
-});
-
-// use ip address to get lon and lat
 
 // get data from url
 const fetchData = async (url) => {
@@ -29,18 +16,17 @@ const fetchData = async (url) => {
   return JSONdata
 }
 
+app.use(express.static("../front-end/build"));
 
-// when wait for a response from an api, make the callback function async, and await the promise reponse
-app.get("/getUsersLocation", async function (req, res) {
+app.get("/", async function (req, res) {
+  res.sendFile(path.join("../front-end/build/index.html"));
   // get the ip address
   // get the lat and lon
   // get the weather
-  // send data to front
+  // send data to front-end
 
-  // const ipAddress = req.socket.remoteAddress;
   // random ip address -> https://www.ipvoid.com/random-ip/
-  // const ipAddress = '31.48.173.70';
-  const ipAddress = '30.82.166.186';
+  const ipAddress = req.socket.remoteAddress;
 
   // const url = 'https://api.ipgeolocation.io/ipgeo?apiKey=IPKEY&ip=ipAddress';
   const geolocationUrl = `https://api.ipgeolocation.io/ipgeo?apiKey=${IP_KEY}&ip=${ipAddress}`
@@ -49,7 +35,7 @@ app.get("/getUsersLocation", async function (req, res) {
   const { city, country_name, latitude, longitude } = location;
 
   // console.log(city, country_name, latitude, longitude)
-  const cityAndCountry = {"city": city, "country_name": country_name}
+  const cityAndCountry = { "city": city, "country_name": country_name }
 
   const openWeatherApi = {
     dailyUrl: "https://api.openweathermap.org/data/2.5/onecall?",
@@ -69,11 +55,9 @@ app.get("/getUsersLocation", async function (req, res) {
   // 5 DAY / 3 HOUR FORECAST = https://api.openweathermap.org/data/2.5/forecast?lat=51&lon=0.1&appid=__&units=metric
   // ONE CALL API = https://api.openweathermap.org/data/2.5/onecall?lat=51&lon=0.1&exclude=minutely,hourly&appid=__&units=metric
 
-  res.json({ "dailyData": dailyData, "threeHourData": threeHourData, "cityAndCountry": cityAndCountry});
+  res.json({ "dailyData": dailyData, "threeHourData": threeHourData, "cityAndCountry": cityAndCountry });
 })
 
-
-// use lat and lon to get weather 
 
 
 app.listen(port, function () {
