@@ -76,12 +76,6 @@ app.get("/getUsersLocation", async function (req, res) {
 // use lat and lon to get weather 
 
 
-
-/*
-app.get("/http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=55b367e1dff8adb640b0500f628d0a83", function(req, res) {
-  res.json(data)
-})
-*/
 app.listen(port, function () {
   console.log(`Your app is listening on ${port}`);
 });
