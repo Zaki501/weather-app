@@ -18,8 +18,8 @@ const fetchData = async (url) => {
 
 app.use(express.static("../front-end/build"));
 
-app.get("/", async function (req, res) {
-  res.sendFile(path.join("../front-end/build/index.html"));
+app.get("/getWeather", async function (req, res) {
+  // res.sendFile(path.join("../front-end/build/index.html"));
   // get the ip address
   // get the lat and lon
   // get the weather
@@ -27,6 +27,8 @@ app.get("/", async function (req, res) {
 
   // random ip address -> https://www.ipvoid.com/random-ip/
   const ipAddress = req.socket.remoteAddress;
+  console.log(ipAddress)
+  // const ipAddress = '218.114.144.102';
 
   // const url = 'https://api.ipgeolocation.io/ipgeo?apiKey=IPKEY&ip=ipAddress';
   const geolocationUrl = `https://api.ipgeolocation.io/ipgeo?apiKey=${IP_KEY}&ip=${ipAddress}`

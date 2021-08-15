@@ -14,6 +14,11 @@ const theme = createMuiTheme({
   },
 })
 
+// look into how folder strcture affects deploying to heroku
+// move front end and back end to different repos? front set proxy set to backend url address
+// https://www.newline.co/fullstack-react/articles/using-create-react-app-with-a-server/
+// https://stackoverflow.com/a/47132360
+
 function App() {
   const [DailyData, setDailyData] = useState<any | null>(null);
   const [ThreeHourData, setThreeHourData] = useState<any | null>(null);
@@ -21,8 +26,6 @@ function App() {
   const [Loading, setLoading] = useState(true);
   const [FocusCard, setFocusCard] = useState(0);
 
-  // length of bars - negative temps!
-  // color of bar - use d3, or conditional css (array of possible color values, )
 
   const changeFocus = function (index: number, dt: any) {
     setFocusCard(index);
@@ -46,7 +49,7 @@ function App() {
   };
 
   const fetchBackendData = async () => {
-    const response = await fetch("/getUsersLocation");
+    const response = await fetch("/getWeather");
     const { dailyData, threeHourData, cityAndCountry } = await response.json()
     setDailyData(dailyData);
     setThreeHourData(threeHourData);
@@ -64,7 +67,7 @@ function App() {
   // useEffect(() => fetchLocalData(), [])
 
   useEffect(() => {
-    fetchBackendData()
+    fetchBackendData();
 
   }, [])
 

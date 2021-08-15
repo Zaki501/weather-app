@@ -98,8 +98,6 @@ const WeatherTable = (props: { hour: any }) => {
   const icon = props.hour.weather[0].icon;
   const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
   const temp = `${Math.round(props.hour.main.temp * 10) / 10}°C`
-  // var rounded = Math.round(number * 10) / 10
-  //`${parseFloat(props.hour.main.temp)}°C`
 
   // useEffect(() => {
   //   const tempNumber = props.hour.main.temp;
