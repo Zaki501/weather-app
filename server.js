@@ -16,11 +16,12 @@ const fetchData = async (url) => {
   return JSONdata
 }
 
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, './client/build/')));
 
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname, './client/build/public/index.html'));
-// });
+app.get('/test', function (req, res) {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+
+});
 
 app.get("/getWeather", async function (req, res) {
   // res.sendFile(path.join("../front-end/build/index.html"));
