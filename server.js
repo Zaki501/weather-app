@@ -1,9 +1,11 @@
 require('dotenv').config()
 const fetch = require('node-fetch');
+const cors = require('cors')
 const express = require('express');
 const path = require('path');
 
 const app = express();
+app.use(cors())
 
 const port = process.env.PORT;
 const IP_KEY = process.env.IP_KEY
@@ -15,6 +17,8 @@ const fetchData = async (url) => {
   const JSONdata = await response.json();
   return JSONdata
 }
+
+//cors for backend, to send data to frontend
 
 app.use(express.static(path.join(__dirname, './client/build')));
 
