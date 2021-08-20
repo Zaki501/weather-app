@@ -19,6 +19,7 @@ const fetchData = async (url) => {
 }
 
 //cors for backend, to send data to frontend
+// heroku bash, run npm build, why cant it serve the build??
 
 // if (process.env.NODE_ENV === "production") {
 //   // Set the static assets folder (ie, client build)
@@ -28,10 +29,10 @@ const fetchData = async (url) => {
 //   });
 // }
 
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(express.static(path.resolve(__dirname, './client/build')));
 
 app.get('/test', function (req, res) {
-  res.sendFile(path.join(__dirname, 'client', 'build'));
+  res.sendFile(path.join(__dirname,  './client/build/index.html'));
 });
 
 app.get("/getWeather", async function (req, res) {
