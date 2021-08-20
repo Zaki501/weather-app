@@ -45,7 +45,7 @@ app.get("/getWeather", async function (req, res) {
 
   // random ip address -> https://www.ipvoid.com/random-ip/
   // const ipAddress = req.socket.remoteAddress;
-  // console.log(ipAddress)
+
   const ipAddress = '218.114.144.102';
 
   // const url = 'https://api.ipgeolocation.io/ipgeo?apiKey=IPKEY&ip=ipAddress';
