@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 app.use(cors())
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3001;
 const IP_KEY = process.env.IP_KEY
 const WEATHER_KEY = process.env.WEATHER_KEY
 
