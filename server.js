@@ -29,12 +29,11 @@ const fetchData = async (url) => {
 //   });
 // }
 
-app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+app.use(express.static(path.join(__dirname, '/client/build')))
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/client/build'));
-});
-
+// app.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname, '/client/build', 'index.html'))
+// })
 
 app.get("/getWeather", async function (req, res) {
   // res.sendFile(path.join("../front-end/build/index.html"));
