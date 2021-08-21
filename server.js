@@ -18,31 +18,12 @@ const fetchData = async (url) => {
   return JSONdata
 }
 
-//cors for backend, to send data to frontend
-// heroku bash, run npm build, why cant it serve the build??
-
-// if (process.env.NODE_ENV === "production") {
-//   // Set the static assets folder (ie, client build)
-//   app.use(express.static('client/build'));
-//   app.get('*', (req,res) => {
-//   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-//   });
-// }
-
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-
 app.get("/getWeather", async function (req, res) {
-  // res.sendFile(path.join("../front-end/build/index.html"));
-  // get the ip address
-  // get the lat and lon
-  // get the weather
-  // send data to front-end
-
   // random ip address -> https://www.ipvoid.com/random-ip/
-  // const ipAddress = req.socket.remoteAddress;
-
-  const ipAddress = '218.114.144.102';
+  // const ipAddress = '218.114.144.102';
+  const ipAddress = req.socket.remoteAddress;
 
   // const url = 'https://api.ipgeolocation.io/ipgeo?apiKey=IPKEY&ip=ipAddress';
   const geolocationUrl = `https://api.ipgeolocation.io/ipgeo?apiKey=${IP_KEY}&ip=${ipAddress}`
