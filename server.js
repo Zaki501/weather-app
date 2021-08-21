@@ -24,8 +24,13 @@ app.get("/getWeather", async function (req, res) {
   // random ip address -> https://www.ipvoid.com/random-ip/
   // const ipAddress = '218.114.144.102';
   // const ipAddress = req.socket.remoteAddress;
-  const ipAddress = req.ip
+  // const ipAddress = req.ip
+
+  let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  const ipAddress = ip.toString().replace('::ffff:', '');
+
   console.log(ipAddress)
+  
   // const url = 'https://api.ipgeolocation.io/ipgeo?apiKey=IPKEY&ip=ipAddress';
   const geolocationUrl = `https://api.ipgeolocation.io/ipgeo?apiKey=${IP_KEY}&ip=${ipAddress}`
 
