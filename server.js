@@ -82,3 +82,7 @@ app.get("/getWeather", async function (req, res) {
 app.listen(port, function () {
   console.log(`Your app is listening on ${port}`);
 });
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, './client/build')));
+}
