@@ -11,7 +11,8 @@
     "node": "^10.19.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "description": "This app takes your location (Lon and Lat), and displays the current and future weather. Made in React, with Material UI for styling, and OpenWeather API for the weather data.",
   "main": "server.js",
