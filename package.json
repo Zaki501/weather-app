@@ -9,5 +9,21 @@
   },
   "engines": {
     "node": "^10.19.0"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "description": "This app takes your location (Lon and Lat), and displays the current and future weather. Made in React, with Material UI for styling, and OpenWeather API for the weather data.",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zaki501/weather-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zaki501/weather-app/issues"
+  },
+  "homepage": "https://github.com/Zaki501/weather-app#readme"
 }
